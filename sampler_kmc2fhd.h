@@ -42,7 +42,7 @@ public:
 			}
 		}
 		if (CONFIG::DEBUG) assert( n!=0 );
-		return n ? ( vsum / OTYPE(n) ): OTYPE(-1);
+		return n ? vsum: OTYPE(-1);
 	}
 
 	inline geometry::any_shape<CONFIG> support( point_type focus ) const {
