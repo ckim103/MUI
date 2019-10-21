@@ -24,6 +24,7 @@
 #include "sampler_gauss.h"
 #include "sampler.h"
 #include "sampler_mov_avg.h"
+#include "sampler_kmc2fhd.h"
 #include "sampler_nn.h"
 #include "sampler_pseudo_nn.h"
 #include "sampler_pseudo_n2_linear.h"
@@ -57,6 +58,7 @@ namespace mui {
 		DECLARE_SAMPLER_1ARG(sampler_pseudo_nearest_neighbor,SUFFIX,config_##SUFFIX)\
 		DECLARE_SAMPLER_1ARG(sampler_pseudo_nearest2_linear,SUFFIX,config_##SUFFIX)\
 		DECLARE_SAMPLER_1ARG(sampler_moving_average,SUFFIX,config_##SUFFIX)\
+		DECLARE_SAMPLER_1ARG(sampler_kmc_to_fhd,SUFFIX,config_##SUFFIX)\
 		DECLARE_SAMPLER_1ARG(sampler_exact,SUFFIX,config_##SUFFIX)\
 		DECLARE_SAMPLER_1ARG(sampler_gauss,SUFFIX,config_##SUFFIX)\
 		DECLARE_SAMPLER_0ARG(chrono_sampler_exact,SUFFIX,config_##SUFFIX);\
