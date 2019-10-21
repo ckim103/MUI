@@ -20,6 +20,7 @@ public:
 	using REAL       = typename CONFIG::REAL;
 	using INT        = typename CONFIG::INT;
 	using point_type = typename CONFIG::point_type;
+	constexpr static REAL eps = 1e-6;
 
 	sampler_kmc_to_fhd( point_type bbox_ ) {
 		bbox  = bbox_;
@@ -30,20 +31,22 @@ public:
 		INT n(0);
 		OTYPE vsum(0);
 		for(INT i = 0 ; i < data_points.size() ; i++) {
-			point_type dx = apply( data_points[i].first - focus, abs );
+			point_type dx = data_points[i].first - focus;
 			bool within = true;
-			for(INT i = 0 ; within && i < CONFIG::D ; i++ ) within = within && ( dx[i] < bbox[i] );
+			for(INT i = 0 ; within && i < CONFIG::D ; i++ ) {
+				within = within && ( dx[i] >= -(0.5 + eps) * bbox[i] && dx[i] < (0.5 - eps) * bbox[i] );
+			}
 			if ( within ) {
 				vsum += data_points[i].second;
 				n++;
 			}
 		}
 		if (CONFIG::DEBUG) assert( n!=0 );
-		return n ? ( vsum / OTYPE(n) ): OTYPE(0.);
+		return n ? ( vsum / OTYPE(n) ): OTYPE(-1);
 	}
 
 	inline geometry::any_shape<CONFIG> support( point_type focus ) const {
-		return geometry::box<CONFIG>( focus - 0.5 * bbox, focus + 0.5 * bbox );
+		return geometry::box<CONFIG>( focus - (0.5 + eps) * bbox, focus + (0.5 + eps) * bbox );
 	}
 
 protected:
