@@ -4,8 +4,8 @@
  *  sampler for KMC (finer 2d lattice) -> FHD (coarser 3d fluid cells)
  */
 
-#ifndef MUI_SAMPLER_KMC_TO_FHD_H_
-#define MUI_SAMPLER_KMC_TO_FHD_H_
+#ifndef MUI_SAMPLER_KMC_FHD_H_
+#define MUI_SAMPLER_KMC_FHD_H_
 
 #include "config.h"
 #include "sampler.h"
@@ -13,7 +13,7 @@
 namespace mui {
 
 template<typename O_TP, typename I_TP=O_TP, typename CONFIG=default_config>
-class sampler_kmc_to_fhd {
+class sampler_kmc_fhd {
 public:
 	using OTYPE      = O_TP;
 	using ITYPE      = I_TP;
@@ -22,7 +22,7 @@ public:
 	using point_type = typename CONFIG::point_type;
 	constexpr static REAL eps = 1e-6;
 
-	sampler_kmc_to_fhd( point_type bbox_ ) {
+	sampler_kmc_fhd( point_type bbox_ ) {
 		bbox  = bbox_;
 	}
 
@@ -55,4 +55,4 @@ protected:
 
 }
 
-#endif /* MUI_SAMPLER_KMC_TO_FHD_H_ */
+#endif /* MUI_SAMPLER_KMC_FHD_H_ */
